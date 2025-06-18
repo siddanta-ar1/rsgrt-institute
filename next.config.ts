@@ -1,16 +1,40 @@
+// @ts-check
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'images.unsplash.com',
-      'plus.unsplash.com',
-      'source.unsplash.com',
-      'unsplash.com', // optional fallback
-       'media.istockphoto.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'plus.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.istockphoto.com',
+      },
     ],
   },
-}
+  /**
+   * @param {import('webpack').Configuration} config
+   */
+  webpack(config: import('webpack').Configuration) {
+    if (config.module) {
+      config.module.exprContextCritical = false;
+    }
+    return config;
+  },
+};
 
-module.exports = nextConfig
-
+module.exports = nextConfig;
