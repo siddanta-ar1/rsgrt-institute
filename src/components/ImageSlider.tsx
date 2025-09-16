@@ -20,6 +20,7 @@ export default function ImageSlider() {
   const [current, setCurrent] = useState(0)
   const autoplayRef = useRef<number | null>(null)
   const pauseRef = useRef(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>(
     {
@@ -37,7 +38,7 @@ export default function ImageSlider() {
         },
       },
       slideChanged(s) {
-        setCurrent(s.track.details.rel) // relative index
+        setCurrent(s.track.details.rel)
       },
       created(s) {
         setCurrent(s.track.details.rel)
@@ -54,16 +55,15 @@ export default function ImageSlider() {
   }, [])
 
   const startAutoplay = useCallback(() => {
-    if (prefersReducedMotion) return
+    if (prefersReducedMotion || !slider.current) return
     clearAutoplay()
-    // use window.setTimeout so we can clear by id easily
+    
     const run = () => {
-      if (pauseRef.current) {
-        // if paused (hover/focus) try again later
+      if (pauseRef.current || !slider.current) {
         autoplayRef.current = window.setTimeout(run, 1200)
         return
       }
-      slider.current?.next()
+      slider.current.next()
       autoplayRef.current = window.setTimeout(run, 2800)
     }
     autoplayRef.current = window.setTimeout(run, 2800)
@@ -72,62 +72,61 @@ export default function ImageSlider() {
   useEffect(() => {
     startAutoplay()
     return () => clearAutoplay()
-  }, [startAutoplay, clearAutoplay])
+  }, [startAutoplay])
 
-  // Pause on hover / focus
   const handleMouseEnter = () => {
     pauseRef.current = true
     clearAutoplay()
   }
+
   const handleMouseLeave = () => {
     pauseRef.current = false
     startAutoplay()
   }
 
-  // Keyboard navigation (left/right) for the slider root
   useEffect(() => {
-    const root = sliderRef.current
+    const root = containerRef.current
     if (!root) return
+    
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') slider.current?.next()
       if (e.key === 'ArrowLeft') slider.current?.prev()
     }
+    
     root.addEventListener('keydown', onKey)
     return () => root.removeEventListener('keydown', onKey)
-  }, [sliderRef, slider])
+  }, [slider])
 
   const goTo = (idx: number) => slider.current?.moveToIdx(idx)
 
   const handleImageClick = (alt: string) => {
-    // replace with a modal or lightbox if desired
     console.log(`Image clicked: ${alt}`)
   }
 
   return (
-    <section
-      className="py-12 px-4"
-      aria-label="Our focus areas carousel"
-    >
+    <section className="py-12 px-4" aria-label="Our focus areas carousel">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold text-center mb-6 text-slate-900">Our Focus Areas</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-slate-900">
+          Our Focus Areas
+        </h2>
 
         <div
-          ref={sliderRef}
+          ref={(node) => {
+            sliderRef(node)
+            if (node) containerRef.current = node
+          }}
           className="keen-slider"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onFocus={handleMouseEnter} // pause when any child gets focus
+          onFocus={handleMouseEnter}
           onBlur={handleMouseLeave}
-          tabIndex={0} // make container focusable for keyboard nav
+          tabIndex={0}
           role="region"
           aria-roledescription="carousel"
           aria-label="Image carousel of focus areas"
         >
           {images.map((img, idx) => (
-            <div
-              key={img.src}
-              className="keen-slider__slide flex justify-center"
-            >
+            <div key={img.src} className="keen-slider__slide flex justify-center">
               <article
                 className="w-full max-w-[360px] rounded-xl overflow-hidden shadow-lg cursor-pointer transform transition hover:-translate-y-1 focus-within:-translate-y-1"
                 onClick={() => handleImageClick(img.alt)}
@@ -140,11 +139,9 @@ export default function ImageSlider() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     style={{ objectFit: 'cover' }}
                     className="rounded-t-xl"
-                    // only the first slide is priority to avoid loading penalty
                     priority={idx === 0}
                   />
                 </div>
-
                 <div className="p-4 text-center bg-white">
                   <p className="text-sm font-medium text-slate-800">{img.alt}</p>
                 </div>
@@ -153,8 +150,7 @@ export default function ImageSlider() {
           ))}
         </div>
 
-        {/* Controls */}
-        <div className="mt-4 mt-6 flex items-center justify-center gap-4">
+        <div className="mt-6 flex items-center justify-center gap-4">
           <button
             onClick={() => slider.current?.prev()}
             className="inline-flex items-center justify-center w-10 h-10 rounded-md bg-white border border-slate-100 shadow-sm hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200"
@@ -165,7 +161,6 @@ export default function ImageSlider() {
             </svg>
           </button>
 
-          {/* Dots */}
           <div className="flex items-center gap-2">
             {images.map((_, idx) => (
               <button

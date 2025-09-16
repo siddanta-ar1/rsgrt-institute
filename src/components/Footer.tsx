@@ -8,7 +8,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   // Function to handle smooth scrolling to top
-  const scrollToTop = (e) => {
+  const scrollToTop = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
