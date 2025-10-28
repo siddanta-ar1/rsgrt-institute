@@ -11,7 +11,7 @@ export default function NotFound() {
       fontFamily: 'sans-serif' 
     }}>
       <h1>🚧 Coming Soon! 🚧</h1>
-      <p>This page is under construction. We'll be here soon.</p>
+      <p>This page is under construction. We will be here soon.</p>
       <Link href="/">
         Go back home
       </Link>
