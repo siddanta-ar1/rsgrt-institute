@@ -1,7 +1,6 @@
-// @ts-check
+import type { NextConfig } from 'next'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
@@ -24,25 +23,17 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'media.istockphoto.com',
       },
-       {
+      {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
       },
       {
         protocol: 'https',
-        hostname: 'ui-avatars.com', // fallback avatar service
+        hostname: 'ui-avatars.com',
       },
     ],
   },
-  /**
-   * @param {import('webpack').Configuration} config
-   */
-  webpack(config: import('webpack').Configuration) {
-    if (config.module) {
-      config.module.exprContextCritical = false;
-    }
-    return config;
-  },
-};
+  turbopack: {},
+}
 
-module.exports = nextConfig;
+export default nextConfig

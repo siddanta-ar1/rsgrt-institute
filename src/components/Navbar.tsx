@@ -8,6 +8,12 @@ import { Menu, X, ChevronDown, LogOut } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useSupabase } from '@/lib/supabaseProvider'
 import type { Session } from '@supabase/supabase-js'
+import { Shield } from 'lucide-react'
+
+const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
+  .split(',')
+  .map((e) => e.trim().toLowerCase())
+  .filter(Boolean)
 
 export default function Navbar() {
   const { supabase } = useSupabase()
@@ -15,6 +21,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const router = useRouter()
+  const isAdmin = session?.user?.email && ADMIN_EMAILS.includes(session.user.email.toLowerCase())
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session))
@@ -87,6 +94,16 @@ export default function Navbar() {
               <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
+
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1.5 text-indigo-600 font-semibold hover:text-indigo-800 transition-colors"
+            >
+              <Shield size={16} />
+              Admin
+            </Link>
+          )}
 
           {session?.user ? (
             <div className="relative">
@@ -163,6 +180,17 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+
+            {isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-2 text-indigo-600 font-semibold"
+              >
+                <Shield size={18} />
+                Admin Panel
+              </Link>
+            )}
 
             {session?.user ? (
               <div className="space-y-3">

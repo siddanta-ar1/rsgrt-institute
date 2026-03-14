@@ -16,11 +16,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <Navbar />
-        <SupabaseProvider>  
-        <main className="flex-1 mt-10">{children}</main>
+        <SupabaseProvider>
+          <Navbar />
+          <main className="flex-1 mt-10">{children}</main>
+          <Footer />
         </SupabaseProvider>
-        <Footer />
       </body>
     </html>
   )

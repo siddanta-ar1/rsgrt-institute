@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion, Variants } from 'framer-motion'
 
 // --- Data Structure Update ---
@@ -12,7 +13,7 @@ const courses = [
     meta: '8 weeks • Intermediate',
     image: '/python.jpeg',
     alt: 'Python code on a screen for geospatial analysis',
-    href: '/courses/python-geospatial',
+    href: '/courses/python',
   },
   {
     title: 'ArcGIS & QGIS Hands-on',
@@ -26,14 +27,14 @@ const courses = [
     meta: '10 weeks • Intermediate',
     image: '/remoteSensing.png',
     alt: 'Satellite image of a coastal area',
-    href: '/courses/remote-sensing',
+    href: '/courses/gee',
   },
   {
     title: 'Flood and Landslide Mapping',
     meta: '4 weeks • Applied',
     image: '/floodMapping.png',
     alt: 'Digital map showing flood risk zones',
-    href: '/courses/hazard-mapping',
+    href: '/courses',
   },
   {
     title: 'Google Earth Engine for Researchers',
@@ -47,21 +48,21 @@ const courses = [
     meta: '8 weeks • Advanced',
     image: '/ml.png',
     alt: 'Abstract neural network graphic',
-    href: '/courses/machine-learning-environmental',
+    href: '/courses/python',
   },
   {
     title: 'Web Designing Basics',
     meta: '4 weeks • Beginner',
     image: '/webDesign.png',
     alt: 'Website layout and design components',
-    href: '/courses/web-design',
+    href: '/courses/web-development',
   },
   {
     title: 'Data Analysis using R and SPSS',
     meta: '6 weeks • Beginner → Intermediate',
     image: '/r.jpeg',
     alt: 'The R programming language logo on a laptop screen',
-    href: '/courses/data-analysis-r-spss',
+    href: '/courses/r-programming',
   },
 ]
 
@@ -129,11 +130,11 @@ export default function CourseList() {
                     {course.meta}
                   </span>
                   <h3 className="text-md font-bold text-slate-900 flex-grow leading-snug">
-                    <a href={course.href} className="focus:outline-none">
+                    <Link href={course.href} className="focus:outline-none">
                       {/* Makes the entire card clickable */}
                       <span className="absolute inset-0" aria-hidden="true" />
                       {course.title}
-                    </a>
+                    </Link>
                   </h3>
                   <div className="mt-4 text-sm font-semibold text-indigo-600 flex items-center gap-1.5 group-hover:text-indigo-800 transition-colors">
                     View Details
@@ -147,12 +148,12 @@ export default function CourseList() {
 
         {/* CTA Button */}
         <div className="mt-16 text-center">
-          <a
+          <Link
             href="/courses"
             className="inline-flex items-center gap-2 bg-indigo-600 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg hover:bg-indigo-700 transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 transform hover:scale-105"
           >
             Explore All Courses
-          </a>
+          </Link>
         </div>
       </div>
     </section>
