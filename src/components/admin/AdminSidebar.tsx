@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, BookOpen, Newspaper, MessageSquare, ArrowLeft } from 'lucide-react'
 
@@ -16,9 +17,25 @@ export default function AdminSidebar() {
 
   return (
     <aside className="w-56 shrink-0 bg-white border-r border-slate-200 p-4 space-y-1 hidden md:block">
-      <div className="mb-6">
-        <h2 className="text-xs font-semibold uppercase text-slate-400 tracking-wider mb-3 px-3">
-          Admin Panel
+      <Link href="/" className="flex items-center gap-2 mb-6 group">
+        <Image
+          src="/logo.png"
+          alt="RSGRT Logo"
+          width={36}
+          height={36}
+          className="rounded-lg shadow-md group-hover:scale-110 transition-transform duration-300"
+        />
+        <div className="flex flex-col">
+          <span className="text-sm font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+            RSGRT
+          </span>
+          <span className="text-xs text-slate-500">Admin Panel</span>
+        </div>
+      </Link>
+      <div className="mb-6 border-b border-slate-200"></div>
+      <div className="mb-3">
+        <h2 className="text-xs font-semibold uppercase text-slate-400 tracking-wider px-3">
+          Navigation
         </h2>
       </div>
 

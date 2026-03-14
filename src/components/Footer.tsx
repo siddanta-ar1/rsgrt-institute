@@ -2,6 +2,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
 
 export default function Footer() {
@@ -24,12 +25,13 @@ export default function Footer() {
           <div>
             <Link href="/" aria-label="RSGRT Institute home" className="block mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-indigo-600/10 ring-1 ring-indigo-100 flex items-center justify-center">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M3 12h18" stroke="#4f46e5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M12 3v18" stroke="#4f46e5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
+                <Image
+                  src="/logo.png"
+                  alt="RSGRT Logo"
+                  width={48}
+                  height={48}
+                  className="rounded-lg shadow-md hover:scale-110 transition-transform duration-300"
+                />
 
                 <div>
                   <div className="text-lg font-semibold text-slate-900">RSGRT Institute</div>
