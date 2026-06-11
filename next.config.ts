@@ -9,6 +9,8 @@ const securityHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  // Transpile framer-motion so Next.js webpack can resolve motion-dom chunks
+  transpilePackages: ['framer-motion'],
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }]
   },

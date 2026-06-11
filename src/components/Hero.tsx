@@ -92,11 +92,30 @@ export default function Hero() {
               ].map(({ icon: Icon, label }) => (
                 <span
                   key={label}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-200 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-200 bg-white/5 border border-white/10 px-3 py-1.5 rounded-full backdrop-blur-sm"
                 >
                   <Icon size={12} className="text-sky-300" />
                   {label}
                 </span>
+              ))}
+            </motion.div>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.46 }}
+              className="mt-10 flex gap-8 border-t border-white/10 pt-8"
+            >
+              {[
+                { value: '7+', label: 'Courses' },
+                { value: '500+', label: 'Students' },
+                { value: '10+', label: 'Years Experience' },
+              ].map(({ value, label }) => (
+                <div key={label}>
+                  <p className="text-2xl font-extrabold text-white tracking-tight">{value}</p>
+                  <p className="text-xs text-sky-300/80 mt-0.5">{label}</p>
+                </div>
               ))}
             </motion.div>
           </div>
