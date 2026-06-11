@@ -128,13 +128,15 @@ export default function Hero() {
             className="relative hidden lg:block"
             aria-hidden
           >
-            <div className="w-full aspect-square max-w-130 mx-auto">
+            <div
+              className="w-full aspect-square max-w-130 mx-auto"
+              style={{
+                maskImage: 'radial-gradient(ellipse 70% 70% at 50% 50%, black 55%, transparent 85%)',
+                WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at 50% 50%, black 55%, transparent 85%)',
+              }}
+            >
               <GlobeScene />
             </div>
-            {/* Drag hint */}
-            <p className="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-sky-400/50 select-none whitespace-nowrap">
-              drag to rotate
-            </p>
           </motion.div>
 
         </div>

@@ -38,3 +38,11 @@ export type CourseMaterial = {
   url: string
   created_at: string
 }
+
+export type CourseVideo = {
+  id: string
+  title: string
+  description: string | null
+  url: string
+  created_at: string
+}

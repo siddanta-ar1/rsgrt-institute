@@ -81,7 +81,7 @@ export default function AdminDashboard() {
           <Link
             key={card.label}
             href={card.href}
-            className="bg-white rounded-xl shadow-sm border p-5 flex items-center gap-4 hover:shadow-md transition-shadow"
+            className="bg-white rounded-2xl shadow-sm p-5 flex items-center gap-4 hover:shadow-md transition-shadow"
           >
             <div
               className={`w-12 h-12 rounded-lg ${card.color} flex items-center justify-center`}
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Recent Messages */}
-      <div className="bg-white rounded-xl shadow-sm border p-5">
+      <div className="bg-white rounded-2xl shadow-sm p-5">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-slate-900">Recent Messages</h2>
           <Link
@@ -115,7 +115,7 @@ export default function AdminDashboard() {
             {recentMessages.map((msg) => (
               <div
                 key={msg.id}
-                className="flex items-start gap-3 p-3 rounded-lg bg-slate-50"
+                className="flex items-start gap-3 p-3 rounded-xl bg-slate-50/80"
               >
                 <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-sm font-bold shrink-0">
                   {(msg.profiles?.username || 'U')[0].toUpperCase()}

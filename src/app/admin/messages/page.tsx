@@ -61,13 +61,13 @@ export default function AdminMessagesPage() {
       </div>
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-lg text-sm">
+        <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-xl text-sm">
           {error}
         </div>
       )}
 
       {messages.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-sm border p-8 text-center">
+        <div className="bg-white rounded-2xl shadow-sm p-8 text-center">
           <p className="text-slate-500">No messages yet.</p>
           <p className="text-sm text-slate-400 mt-1">
             Messages sent from the contact page will appear here.
@@ -78,7 +78,7 @@ export default function AdminMessagesPage() {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className="bg-white rounded-xl shadow-sm border p-4 flex items-start gap-4 group"
+              className="bg-white rounded-2xl shadow-sm p-4 flex items-start gap-4 group"
             >
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center text-blue-700 font-bold text-sm shrink-0">
                 {(msg.profiles?.username || 'U')[0].toUpperCase()}

@@ -8,9 +8,11 @@ export const metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <AdminGuard>
-      <div className="flex flex-col md:flex-row min-h-[calc(100vh-140px)]">
+      <div className="flex min-h-screen bg-[#f0f2f5]">
         <AdminSidebar />
-        <div className="flex-1 p-4 md:p-6 bg-slate-50 overflow-auto">{children}</div>
+        <div className="flex-1 flex flex-col min-w-0">
+          <div className="flex-1 p-5 md:p-8 overflow-auto">{children}</div>
+        </div>
       </div>
     </AdminGuard>
   )

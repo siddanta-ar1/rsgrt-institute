@@ -3,6 +3,8 @@ import { supabase } from '@/lib/supabaseClient'
 import NewsCard from '@/components/NewsCard'
 import type { NewsItem } from '@/lib/types'
 
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   title: 'News | RSGRT Institute',
   description: 'Latest news and updates from RSGRT Institute.',

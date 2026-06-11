@@ -49,6 +49,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Courses', href: '/courses' },
+    { name: 'Videos', href: '/videos' },
     { name: 'News', href: '/news' },
     { name: 'Contact', href: '/contact' },
   ]
@@ -91,7 +92,7 @@ export default function Navbar() {
               className="relative text-gray-700 hover:text-blue-600 transition-colors duration-300 group"
             >
               {link.name}
-              <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-linear-to-r from-blue-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-linear-to-r from-blue-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
 

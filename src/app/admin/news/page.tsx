@@ -151,7 +151,7 @@ export default function AdminNewsPage() {
 
       {/* Form */}
       {showForm && (
-        <div className="bg-white rounded-xl shadow-sm border p-5 mb-6">
+        <div className="bg-white rounded-2xl shadow-sm p-5 mb-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-slate-800">
               {editingId ? 'Edit News' : 'New Article'}
@@ -256,9 +256,9 @@ export default function AdminNewsPage() {
       )}
 
       {/* Table */}
-      <div className="bg-white rounded-xl shadow-sm border overflow-x-auto">
+      <div className="bg-white rounded-2xl shadow-sm overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b">
+          <thead className="bg-slate-50/80">
             <tr>
               <th className="text-left px-4 py-3 font-medium text-slate-600">Title</th>
               <th className="text-left px-4 py-3 font-medium text-slate-600 hidden sm:table-cell">Description</th>
@@ -266,7 +266,7 @@ export default function AdminNewsPage() {
               <th className="text-right px-4 py-3 font-medium text-slate-600">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y">
+          <tbody className="divide-y divide-slate-100">
             {news.length === 0 ? (
               <tr>
                 <td colSpan={4} className="px-4 py-8 text-center text-slate-500">

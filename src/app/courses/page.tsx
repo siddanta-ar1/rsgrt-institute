@@ -3,6 +3,8 @@ import { supabase } from '@/lib/supabaseClient'
 import CourseCard from '@/components/CourseCard'
 import type { Course } from '@/lib/types'
 
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   title: 'Courses | RSGRT Institute',
   description: 'Explore geospatial and environmental research training courses at RSGRT Institute.',
