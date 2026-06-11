@@ -30,3 +30,11 @@ export type Message = {
   profile_id: string
   profiles?: Profile
 }
+
+export type CourseMaterial = {
+  id: string
+  course_id: string
+  title: string | null
+  url: string
+  created_at: string
+}

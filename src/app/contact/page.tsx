@@ -21,8 +21,14 @@ export default function ContactPage() {
     return () => subscription.unsubscribe()
   }, [supabase])
 
+  const MAX_LEN = 2000
+
   const handleSend = async () => {
     if (!message.trim() || !session?.user) return
+    if (message.length > MAX_LEN) {
+      setError(`Message must be ${MAX_LEN} characters or fewer`)
+      return
+    }
     setSending(true)
     setError('')
 
@@ -57,7 +63,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="max-w-4xl mt-16 mx-auto px-6 py-12">
+    <main className="max-w-4xl mt-16 mx-auto px-4 sm:px-6 py-12">
       <h1 className="text-3xl font-bold text-center mb-8 text-slate-900">Contact Us</h1>
 
       <div className="grid md:grid-cols-2 gap-8">
@@ -118,8 +124,10 @@ export default function ContactPage() {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Write your message here..."
                 rows={5}
+                maxLength={MAX_LEN}
                 className="w-full border rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-300 focus:outline-none resize-none"
               />
+              <p className="text-xs text-slate-400 text-right">{message.length}/{MAX_LEN}</p>
 
               {error && <p className="text-red-500 text-sm">{error}</p>}
               {sent && (

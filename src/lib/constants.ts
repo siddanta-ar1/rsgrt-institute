@@ -7,6 +7,8 @@ export const SITE_CONFIG = {
   address: 'Chitwan, Nepal',
   social: {
     linkedin: 'https://www.linkedin.com/company/rsgrt-institute',
+    linkedinPersonal: 'https://www.linkedin.com/in/remote-sensing-689b063b6/',
+    youtube: 'https://www.youtube.com/@RSGRTInstitute',
     twitter: 'https://twitter.com/RSGRTInstitute',
     facebook: 'https://www.facebook.com/rsgrt.institute',
   },

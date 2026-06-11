@@ -1,12 +1,11 @@
+import type { Metadata } from 'next'
 import { supabase } from '@/lib/supabaseClient'
 import NewsCard from '@/components/NewsCard'
+import type { NewsItem } from '@/lib/types'
 
-type NewsItem = {
-  id: string
-  title: string
-  description: string
-  image_url: string
-  external_link: string
+export const metadata: Metadata = {
+  title: 'News | RSGRT Institute',
+  description: 'Latest news and updates from RSGRT Institute.',
 }
 
 export default async function NewsPage() {
@@ -29,7 +28,13 @@ export default async function NewsPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {news.map((item: NewsItem) => (
-          <NewsCard key={item.id} {...item} />
+          <NewsCard
+            key={item.id}
+            title={item.title}
+            description={item.description ?? undefined}
+            image_url={item.image_url ?? undefined}
+            external_link={item.external_link ?? ''}
+          />
         ))}
       </div>
     </section>

@@ -26,6 +26,7 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
         !session?.user ||
         !ADMIN_EMAILS.includes((session.user.email || '').toLowerCase())
       ) {
+        setLoading(false)
         router.replace('/')
         return
       }

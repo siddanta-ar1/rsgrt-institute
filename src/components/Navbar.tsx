@@ -77,7 +77,7 @@ export default function Navbar() {
             height={40}
             className="rounded-full shadow-md group-hover:scale-110 transition-transform duration-300"
           />
-          <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+          <span className="font-extrabold text-xl tracking-tight bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
             RSGRT Institute
           </span>
         </Link>
@@ -91,7 +91,7 @@ export default function Navbar() {
               className="relative text-gray-700 hover:text-blue-600 transition-colors duration-300 group"
             >
               {link.name}
-              <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute left-0 bottom-[-4px] w-0 h-[2px] bg-linear-to-r from-blue-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
 
@@ -144,7 +144,7 @@ export default function Navbar() {
           ) : (
             <button
               onClick={handleLogin}
-              className="px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium shadow-md hover:scale-105 transition-transform duration-300"
+              className="px-5 py-2 rounded-lg bg-linear-to-r from-blue-600 to-blue-500 text-white font-medium shadow-md hover:scale-105 transition-transform duration-300"
             >
               Login
             </button>
@@ -208,7 +208,7 @@ export default function Navbar() {
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 text-white shadow-md hover:scale-[1.02] transition-transform duration-300"
+                  className="w-full px-4 py-2 rounded-lg bg-linear-to-r from-red-500 to-red-600 text-white shadow-md hover:scale-[1.02] transition-transform duration-300"
                 >
                   Logout
                 </button>
@@ -216,7 +216,7 @@ export default function Navbar() {
             ) : (
               <button
                 onClick={handleLogin}
-                className="w-full px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-md hover:scale-[1.02] transition-transform duration-300"
+                className="w-full px-4 py-2 rounded-lg bg-linear-to-r from-blue-600 to-blue-500 text-white shadow-md hover:scale-[1.02] transition-transform duration-300"
               >
                 Login
               </button>

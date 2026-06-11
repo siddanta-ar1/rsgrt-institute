@@ -45,14 +45,14 @@ export default function NewsCard({
         className="block focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-200"
       >
         {/* Image area */}
-        <div className="relative w-full h-44 sm:h-52 md:h-44 lg:h-48 bg-gradient-to-br from-sky-50 to-indigo-50">
+        <div className="relative w-full h-44 sm:h-52 md:h-44 lg:h-48 bg-linear-to-br from-sky-50 to-indigo-50">
           {/* skeleton / shimmer while image loads */}
           {!imgLoaded && (
             <div
               className="absolute inset-0 animate-pulse"
               aria-hidden
             >
-              <div className="w-full h-full bg-gradient-to-r from-slate-100 via-slate-200 to-slate-100" />
+              <div className="w-full h-full bg-linear-to-r from-slate-100 via-slate-200 to-slate-100" />
             </div>
           )}
 
@@ -68,7 +68,7 @@ export default function NewsCard({
           />
 
           {/* subtle gradient overlay for legibility of potential captions */}
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/10 to-transparent" />
+          <div className="absolute inset-0 pointer-events-none bg-linear-to-t from-black/10 to-transparent" />
         </div>
 
         {/* Content */}

@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 export default function AboutSection() {
   return (
-    <section className="relative py-20 px-6 bg-gradient-to-br from-gray-50 via-white to-gray-100 overflow-hidden">
+    <section className="relative py-20 px-6 bg-linear-to-br from-gray-50 via-white to-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <motion.div
@@ -16,7 +16,7 @@ export default function AboutSection() {
           className="text-center md:text-left"
         >
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
               About RS GRT Institute
             </span>
           </h2>
@@ -60,7 +60,7 @@ export default function AboutSection() {
           viewport={{ once: true }}
           className="relative flex justify-center md:justify-end"
         >
-          <div className="relative w-[300px] md:w-[400px] lg:w-[450px] h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl">
+          <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
             <Image
               src="https://media.istockphoto.com/id/1359499268/photo/young-woman-working-at-home-stock-photo.webp?a=1&b=1&s=612x612&w=0&k=20&c=ThyLJitUy84DGOfb1MprsN0sh38Jz538_R3ObgoRyhk=" // <-- Replace with your actual image
               alt="About RS GRT Institute"
@@ -68,7 +68,7 @@ export default function AboutSection() {
               className="object-cover"
             />
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
           </div>
         </motion.div>
       </div>

@@ -1,36 +1,13 @@
 import { NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabaseAdmin'
-import { createClient } from '@supabase/supabase-js'
-
-const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
-  .split(',')
-  .map((e) => e.trim().toLowerCase())
-  .filter(Boolean)
-
-async function verifyAdmin(request: Request) {
-  const token = request.headers.get('Authorization')?.replace('Bearer ', '')
-  if (!token) return null
-
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser(token)
-
-  if (error || !user) return null
-  if (!ADMIN_EMAILS.includes((user.email || '').toLowerCase())) return null
-  return user
-}
+import { verifyAdmin } from '@/lib/adminAuth'
 
 // GET all courses
 export async function GET(request: Request) {
   const admin = await verifyAdmin(request)
   if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 403 })
 
-  const { data, error } = await supabaseAdmin.from('courses').select('*')
+  const { data, error } = await supabaseAdmin.from('courses').select('*').order('title')
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json(data)
 }
@@ -52,7 +29,7 @@ export async function POST(request: Request) {
     .single()
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json(data)
+  return NextResponse.json(data, { status: 201 })
 }
 
 // UPDATE course

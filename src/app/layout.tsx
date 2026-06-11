@@ -5,10 +5,15 @@ import type { Metadata } from 'next'
 import { SupabaseProvider } from '@/lib/supabaseProvider'
 
 export const metadata: Metadata = {
-  title: 'RSGRT Institute',
+  title: {
+    default: 'RSGRT Institute',
+    template: '%s | RSGRT Institute',
+  },
   description: 'Geospatial and Environmental Research & Training',
-  icons: {
-    icon: '/logo.png',
+  icons: { icon: '/logo.png' },
+  openGraph: {
+    siteName: 'RSGRT Institute',
+    type: 'website',
   },
 }
 

@@ -1,12 +1,11 @@
-// src/app/courses/page.tsx
+import type { Metadata } from 'next'
 import { supabase } from '@/lib/supabaseClient'
 import CourseCard from '@/components/CourseCard'
+import type { Course } from '@/lib/types'
 
-type Course = {
-  id: string
-  title: string
-  image_url: string
-  syllabus_slug: string
+export const metadata: Metadata = {
+  title: 'Courses | RSGRT Institute',
+  description: 'Explore geospatial and environmental research training courses at RSGRT Institute.',
 }
 
 export default async function CoursesPage() {
@@ -17,7 +16,7 @@ export default async function CoursesPage() {
   }
 
   return (
-    <section className="p-6 mt-10 max-w-6xl mx-auto">
+    <section className="px-4 sm:px-6 py-10 mt-10 max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">Available Courses</h1>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {courses?.map((course: Course) => (

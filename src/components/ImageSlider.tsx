@@ -119,10 +119,10 @@ export default function ImageSlider() {
           {images.map((img, idx) => (
             <div key={img.src} className="keen-slider__slide flex justify-center">
               <article
-                className="w-full max-w-[360px] rounded-xl overflow-hidden shadow-lg cursor-pointer transform transition hover:-translate-y-1 focus-within:-translate-y-1"
+                className="w-full rounded-xl overflow-hidden shadow-lg cursor-pointer transform transition hover:-translate-y-1 focus-within:-translate-y-1"
                 onClick={() => handleImageClick(img.alt)}
               >
-                <div className="relative w-full h-[220px] bg-slate-50">
+                <div className="relative w-full aspect-video bg-slate-50">
                   <Image
                     src={img.src}
                     alt={img.alt}

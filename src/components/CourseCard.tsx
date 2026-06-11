@@ -10,7 +10,7 @@ import { BookOpen } from 'lucide-react'
 type Props = {
   id: string
   title: string
-  image_url: string
+  image_url: string | null
   syllabus_slug: string
 }
 
@@ -31,7 +31,7 @@ export default function CourseCard({ title, image_url, syllabus_slug }: Props) {
         aria-label={`View course: ${title}`}
       >
         {/* Image */}
-        <div className="relative h-48 w-full bg-gradient-to-br from-slate-100 to-slate-200">
+        <div className="relative h-48 w-full bg-linear-to-br from-slate-100 to-slate-200">
           {!imgLoaded && (
             <div className="absolute inset-0 animate-pulse bg-slate-200" aria-hidden />
           )}
@@ -43,7 +43,7 @@ export default function CourseCard({ title, image_url, syllabus_slug }: Props) {
             onLoadingComplete={() => setImgLoaded(true)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-black/5 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/20 via-black/5 to-transparent" />
         </div>
 
         {/* Content */}

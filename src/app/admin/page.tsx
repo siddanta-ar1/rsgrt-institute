@@ -6,14 +6,10 @@ import { BookOpen, Newspaper, MessageSquare } from 'lucide-react'
 import type { Message } from '@/lib/types'
 import Link from 'next/link'
 
-type MessageWithProfile = Message & {
-  profiles?: { username: string | null; avatar_url: string | null }
-}
-
 export default function AdminDashboard() {
   const { supabase } = useSupabase()
   const [stats, setStats] = useState({ courses: 0, news: 0, messages: 0 })
-  const [recentMessages, setRecentMessages] = useState<MessageWithProfile[]>([])
+  const [recentMessages, setRecentMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -36,7 +32,7 @@ export default function AdminDashboard() {
         .order('created_at', { ascending: false })
         .limit(5)
 
-      setRecentMessages((messages as MessageWithProfile[]) || [])
+      setRecentMessages((messages as Message[]) || [])
       setLoading(false)
     }
 
