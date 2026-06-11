@@ -1,9 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-
-const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
-  .split(',')
-  .map((e) => e.trim().toLowerCase())
-  .filter(Boolean)
+import { supabaseAdmin } from './supabaseAdmin'
 
 export async function verifyAdmin(request: Request) {
   const token = request.headers.get('Authorization')?.replace('Bearer ', '')
@@ -13,9 +9,16 @@ export async function verifyAdmin(request: Request) {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
-  const { data: { user }, error } = await supabase.auth.getUser(token)
 
+  const { data: { user }, error } = await supabase.auth.getUser(token)
   if (error || !user) return null
-  if (!ADMIN_EMAILS.includes((user.email || '').toLowerCase())) return null
+
+  const { data } = await supabaseAdmin
+    .from('admin_users')
+    .select('user_id')
+    .eq('user_id', user.id)
+    .single()
+
+  if (!data) return null
   return user
 }

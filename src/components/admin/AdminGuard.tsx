@@ -5,11 +5,6 @@ import { useRouter } from 'next/navigation'
 import { useSupabase } from '@/lib/supabaseProvider'
 import type { Session } from '@supabase/supabase-js'
 
-const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
-  .split(',')
-  .map((e) => e.trim().toLowerCase())
-  .filter(Boolean)
-
 export default function AdminGuard({ children }: { children: React.ReactNode }) {
   const { supabase } = useSupabase()
   const router = useRouter()
@@ -17,17 +12,22 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    async function check() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession()
-
-      if (
-        !session?.user ||
-        !ADMIN_EMAILS.includes((session.user.email || '').toLowerCase())
-      ) {
-        setLoading(false)
+    async function check(session: Session | null) {
+      if (!session?.user) {
         router.replace('/')
+        setLoading(false)
+        return
+      }
+
+      const { data } = await supabase
+        .from('admin_users')
+        .select('user_id')
+        .eq('user_id', session.user.id)
+        .single()
+
+      if (!data) {
+        router.replace('/')
+        setLoading(false)
         return
       }
 
@@ -35,15 +35,11 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
       setLoading(false)
     }
 
-    check()
+    supabase.auth.getSession().then(({ data: { session } }) => check(session))
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session: Session | null) => {
-      if (!session?.user || !ADMIN_EMAILS.includes((session.user.email || '').toLowerCase())) {
-        router.replace('/')
-      }
-    })
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => check(session)
+    )
 
     return () => subscription.unsubscribe()
   }, [supabase, router])
