@@ -10,24 +10,33 @@ import { useSupabase } from '@/lib/supabaseProvider'
 import type { Session } from '@supabase/supabase-js'
 import { Shield } from 'lucide-react'
 
-const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || '')
-  .split(',')
-  .map((e) => e.trim().toLowerCase())
-  .filter(Boolean)
-
 export default function Navbar() {
   const { supabase } = useSupabase()
   const [session, setSession] = useState<Session | null>(null)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const router = useRouter()
-  const isAdmin = session?.user?.email && ADMIN_EMAILS.includes(session.user.email.toLowerCase())
+
+  async function checkAdmin(sess: Session | null) {
+    if (!sess?.user) { setIsAdmin(false); return }
+    const { data } = await supabase
+      .from('admin_users')
+      .select('user_id')
+      .eq('user_id', sess.user.id)
+      .single()
+    setIsAdmin(!!data)
+  }
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSession(data.session))
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session)
+      checkAdmin(data.session)
+    })
 
     const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
+      checkAdmin(session)
     })
 
     return () => {
